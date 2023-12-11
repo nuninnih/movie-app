@@ -1,0 +1,18 @@
+[
+    {
+        "username" : "nuninnih",
+        "email" : "nunin@mail.com",
+        "password" : "12345",
+        "role" :"admin",
+        "phoneNumber": "082146560000",
+        "address" : "Jl. Pemuda No. 23 - Surabaya"
+    },
+    {
+        "username" : "staff",
+        "email" : "staff1@mail.com",
+        "password" : "staff1",
+        "role" :"staff",
+        "phoneNumber": "082100000000",
+        "address" : "Jl. Pemuda No. 11 - Surabaya"
+    }
+]

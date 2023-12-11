@@ -1,0 +1,23 @@
+[
+    {
+        "name" : "Romance"
+    },
+    {
+        "name" : "Horror"
+    },
+    {
+        "name" : "Sci-fi"
+    },
+    {
+        "name" : "Comedy"
+    },
+    {
+        "name" : "Drama"
+    },
+    {
+        "name" : "Action"
+    },
+    {
+        "name" : "Animation"
+    }
+]

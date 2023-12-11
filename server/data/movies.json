@@ -1,0 +1,11 @@
+[
+    {
+        "title": "Toy Story",
+        "synopsis": "Your toys playing around in your room. Oh wow!",
+        "trailerUrl": "https://youtu.be/v-PjgYDrg70?si=F38k3ZhYJQ4PR8S8",
+        "imgUrl": "https://m.media-amazon.com/images/M/MV5BMDU2ZWJlMjktMTRhMy00ZTA5LWEzNDgtYmNmZTEwZTViZWJkXkEyXkFqcGdeQXVyNDQ2OTk4MzI@._V1_.jpg",
+        "rating": 8,
+        "genreId" : 6,
+        "authorId": 1
+    }
+]
