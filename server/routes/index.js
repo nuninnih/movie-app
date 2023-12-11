@@ -24,6 +24,6 @@ router.get('/login', async (req, res) => {
 
 router.use('/users', user)
 router.use('/genres', genre)
-router.use('movies', movie)
+router.use('/movies', movie)
 
 module.exports = router
