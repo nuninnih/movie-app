@@ -44,6 +44,7 @@ class MovieController{
             await Movie.update({title, synopsis, trailerUrl, imgUrl, rating, genreId, authorId}, {
                 where : {id}
             })
+            // ! return data
 
             res.status(200).json({message: `Id ${id} data updated`})
         } catch (error) {
@@ -57,10 +58,11 @@ class MovieController{
             const {id} = req.params
             const {rating} = req.body
 
-            await Movie.update({rating}, {
-                where: {id}
+            let data = await Movie.update({rating}, {
+                where: {id},
+                returning : true
             })
-
+            // ! return data
             res.status(200).json({message: `Id ${id} rating updated`})
         } catch (error) {
             console.log(error);
@@ -73,7 +75,7 @@ class MovieController{
             const {id} = req.params
             
             await Movie.destroy({where : {id}})
-
+            // ! message: '<entity name> success to delete'
             res.status(200).json({message: `Id ${id} success deleted`})
         } catch (error) {
             console.log(error);
