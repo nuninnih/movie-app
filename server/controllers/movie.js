@@ -1,29 +1,36 @@
 const { Movie } = require('../models')
 
 class MovieController{
-    static async findAll(req, res){
+    static async findAll(req, res, next){
         try {
             let data = await Movie.findAll()
 
+            if(!data.length){
+                throw {name: "DATA_NOT_FOUND"}
+            }
+
             res.status(200).json(data)
         } catch (error) {
-            res.status(500).json({error : "belum dihandle"})
+            next(error)
         }
     }
 
-    static async findById(req, res){
+    static async findById(req, res, next){
         try {
             const {id} = req.params
             let data = await Movie.findByPk(id)
 
+            if(!data){
+                throw {name: "DATA_NOT_FOUND"}
+            }
+
             res.status(200).json(data)
         } catch (error) {
-            console.log(error);
-            res.status(500).json({error : "belum dihandle"})
+            next(error)
         }
     }
 
-    static async create(req, res){
+    static async create(req, res, next){
         try {
             const {title, synopsis, trailerUrl, imgUrl, rating, genreId, authorId} = req.body
 
@@ -31,29 +38,32 @@ class MovieController{
 
             res.status(201).json(data)
         } catch (error) {
-            console.log(error);
-            res.status(500).json({error : "belum dihandle"})
+            next(error)
         }
     }
 
-    static async update(req, res){
+    static async update(req, res, next){
         try {
             const {id} = req.params
             const {title, synopsis, trailerUrl, imgUrl, rating, genreId, authorId} = req.body
 
+            let data = await Movie.findByPk(id)
+
+            if(!data){
+                throw {name: "DATA_NOT_FOUND"}
+            }
+
             await Movie.update({title, synopsis, trailerUrl, imgUrl, rating, genreId, authorId}, {
                 where : {id}
             })
-            // ! return data
 
-            res.status(200).json({message: `Id ${id} data updated`})
+            res.status(200).json(data)
         } catch (error) {
-            console.log(error);
-            res.status(500).json({error : "belum dihandle"})
+            next(error)
         }
     }
 
-    static async updateRating(req, res){
+    static async updateRating(req, res, next){
         try {
             const {id} = req.params
             const {rating} = req.body
@@ -65,12 +75,11 @@ class MovieController{
             // ! return data
             res.status(200).json({message: `Id ${id} rating updated`})
         } catch (error) {
-            console.log(error);
-            res.status(500).json({error : "belum dihandle"})
+            next(error)
         }
     }
 
-    static async delete(req, res){
+    static async delete(req, res, next){
         try {
             const {id} = req.params
             
@@ -78,8 +87,7 @@ class MovieController{
             // ! message: '<entity name> success to delete'
             res.status(200).json({message: `Id ${id} success deleted`})
         } catch (error) {
-            console.log(error);
-            res.status(500).json({error : "belum dihandle"})
+            next(error)
         }
     }
 }

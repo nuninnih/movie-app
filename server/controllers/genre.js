@@ -1,37 +1,51 @@
 const { Genre } = require('../models')
 
 class GenreController {
-    static async findAll(req, res){
+    static async findAll(req, res, next){
         try {
             let data = await Genre.findAll()
 
+            if(!data.length){
+                throw {name: "DATA_NOT_FOUND"}
+            }
+
             res.status(200).json(data)
         } catch (error) {
-            res.status(500).json({message : "belum dihandle"})
+            next(error)
         }
     }
 
-    static async create(req, res){
+    static async create(req, res, next){
         try {
             const {name} = req.body
 
             let data = await Genre.create({name})
 
+            if(!data){
+                throw {name: "DATA_NOT_FOUND"}
+            }
+
             res.status(201).json(data)
         } catch (error) {
-            res.status(500).json({message : "belum dihandle"})
+            next(error)
         }
     }
 
-    static async update(req, res){
+    static async update(req, res, next){
         try {
             const {id} = req.params
 
+            let data = await Genre.findByPk(id)
+
+            if(!data){
+                throw {name: "DATA_NOT_FOUND"}
+            }
+
             await Genre.update({name}, {where : {id}})
-            // ! return data
-            res.status(200).json({message : `Id ${id} updated`})
+
+            res.status(200).json(data)
         } catch (error) {
-            res.status(500).json({message : "belum dihandle"})
+            next(error)
         }
     }
 }
